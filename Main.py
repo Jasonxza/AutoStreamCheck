@@ -11,7 +11,7 @@ import sys
 API_CHECK_INTERVAL = 35  
 DATA_FILE = 'twitch_data.json'
 CONFIG_FILE = 'config.json'
-LOCAL_VERSION = 1.1
+LOCAL_VERSION = 1.2
 VERSION_URL = "https://raw.githubusercontent.com/Jasonxza/AutoStreamCheck/main/version.txt"
 CODE_URL = "https://raw.githubusercontent.com/Jasonxza/AutoStreamCheck/main/Main.py"
 def check_for_updates():
@@ -62,7 +62,7 @@ def run_setup_ui():
         c_sec = secret_entry.get().strip()
         streamer = streamer_entry.get().strip().lower()
 
-         if not c_id or not c_sec or not streamer:
+if not c_id or not c_sec or not streamer:
             messagebox.showerror("Error", "All fields must be filled out!")
             return
 
