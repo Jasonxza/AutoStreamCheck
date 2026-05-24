@@ -11,7 +11,7 @@ import sys
 API_CHECK_INTERVAL = 35
 DATA_FILE = 'twitch_data.json'
 CONFIG_FILE = 'config.json'
-LOCAL_VERSION = 1.0
+LOCAL_VERSION = 1.3
 VERSION_URL = "https://raw.githubusercontent.com/Jasonxza/AutoStreamCheck/main/version.txt"
 CODE_URL = "https://raw.githubusercontent.com/Jasonxza/AutoStreamCheck/main/Main.py"
 
