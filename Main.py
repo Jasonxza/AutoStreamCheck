@@ -8,22 +8,12 @@ import json
 import os
 import sys
 
-# ==========================================
-#               CONFIGURATION
-# ==========================================
 API_CHECK_INTERVAL = 35  
 DATA_FILE = 'twitch_data.json'
-CONFIG_FILE = 'config.json' # NEW: Where the API keys will be saved
-
-# --- AUTO-UPDATE CONFIG ---
-LOCAL_VERSION = 1.0
-# Updated to your specific Jasonxza RAW repository links
+CONFIG_FILE = 'config.json'
+LOCAL_VERSION = 1.1
 VERSION_URL = "https://raw.githubusercontent.com/Jasonxza/AutoStreamCheck/main/version.txt"
 CODE_URL = "https://raw.githubusercontent.com/Jasonxza/AutoStreamCheck/main/Main.py"
-
-# ==========================================
-#              AUTO-UPDATER
-# ==========================================
 def check_for_updates():
     print(f"Current version: {LOCAL_VERSION}. Checking for updates...")
     try:
@@ -44,10 +34,6 @@ def check_for_updates():
                 print("You are on the latest version.")
     except Exception as e:
         print(f"Auto-update check bypassed (No internet or error): {e}")
-
-# ==========================================
-#            FIRST-TIME SETUP UI
-# ==========================================
 def run_setup_ui():
     """Opens a UI to collect API keys if config.json doesn't exist."""
     setup_root = tk.Tk()
@@ -59,17 +45,14 @@ def run_setup_ui():
     tk.Label(setup_root, text="WELCOME", bg='#18181b', fg='#a970ff', font=('Segoe UI', 16, 'bold')).pack(pady=(20, 5))
     tk.Label(setup_root, text="Please enter your Twitch API details.", bg='#18181b', fg='#adadb8', font=('Segoe UI', 9)).pack(pady=(0, 20))
 
-    # Client ID Field
     tk.Label(setup_root, text="Twitch Client ID", bg='#18181b', fg='#efeff1', font=('Segoe UI', 9, 'bold')).pack(anchor="w", padx=40)
     id_entry = tk.Entry(setup_root, bg='#242427', fg='#efeff1', insertbackground='white', width=40, font=('Segoe UI', 10), bd=0)
     id_entry.pack(pady=(5, 15), ipady=5)
 
-    # Client Secret Field (Hidden characters like a password)
     tk.Label(setup_root, text="Twitch Client Secret", bg='#18181b', fg='#efeff1', font=('Segoe UI', 9, 'bold')).pack(anchor="w", padx=40)
     secret_entry = tk.Entry(setup_root, bg='#242427', fg='#efeff1', insertbackground='white', show="*", width=40, font=('Segoe UI', 10), bd=0)
     secret_entry.pack(pady=(5, 15), ipady=5)
 
-    # Target Streamer Field
     tk.Label(setup_root, text="Target Streamer Username", bg='#18181b', fg='#efeff1', font=('Segoe UI', 9, 'bold')).pack(anchor="w", padx=40)
     streamer_entry = tk.Entry(setup_root, bg='#242427', fg='#efeff1', insertbackground='white', width=40, font=('Segoe UI', 10), bd=0)
     streamer_entry.pack(pady=(5, 25), ipady=5)
@@ -79,11 +62,10 @@ def run_setup_ui():
         c_sec = secret_entry.get().strip()
         streamer = streamer_entry.get().strip().lower()
 
-        if not c_id or not c_sec or not streamer:
+         if not c_id or not c_sec or not streamer:
             messagebox.showerror("Error", "All fields must be filled out!")
             return
 
-        # Save to config.json
         try:
             with open(CONFIG_FILE, 'w') as f:
                 json.dump({
@@ -95,14 +77,12 @@ def run_setup_ui():
         except Exception as e:
             messagebox.showerror("Error", f"Could not save file: {e}")
 
-    # Save Button
     save_btn = tk.Button(setup_root, text="Save & Continue", bg='#a970ff', fg='white', font=('Segoe UI', 10, 'bold'), 
                          activebackground='#9146ff', activeforeground='white', bd=0, cursor="hand2", command=save_and_close)
     save_btn.pack(fill="x", padx=40, ipady=5)
 
     setup_root.mainloop()
 
-# Helper function to grab the config later
 def load_config():
     if os.path.exists(CONFIG_FILE):
         try:
@@ -112,14 +92,10 @@ def load_config():
             return None
     return None
 
-# ==========================================
-#            TWITCH DASHBOARD UI
-# ==========================================
 class TwitchDashboard:
     def __init__(self, root, config):
         self.root = root
         
-        # Load keys from the config dictionary passed into the class
         self.client_id = config.get('CLIENT_ID', '')
         self.client_secret = config.get('CLIENT_SECRET', '')
         self.streamer_login = config.get('STREAMER_LOGIN', '')
@@ -326,27 +302,18 @@ class TwitchDashboard:
             time.sleep(1)
             api_countdown -= 1
 
-# ==========================================
-#               EXECUTION FLOW
-# ==========================================
 if __name__ == "__main__":
-    # 1. Check for updates first
     check_for_updates()
     
-    # 2. Check if user has logged in/set up credentials
     app_config = load_config()
     
-    # 3. If no config exists, open the Setup UI
     if not app_config:
         run_setup_ui()
-        # After UI closes, try loading again to see if they saved
         app_config = load_config()
     
-    # 4. If config exists (either they just made it, or had it already), launch app
     if app_config:
         main_root = tk.Tk()
         app = TwitchDashboard(main_root, app_config)
         main_root.mainloop()
     else:
-        # If they closed the setup window without saving, just exit cleanly
         print("Setup aborted. Exiting...")
