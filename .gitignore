@@ -1,9 +1,21 @@
+
+config.json
+
 twitch_data.json
+
 is_watching.lock
 
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
 
-build/
-dist/
-*.spec
+venv/
+env/
+.venv/
+.env
+
+.vscode/
+.idea/
+
+.DS_Store
+Thumbs.db
