@@ -40,3 +40,32 @@ The "Username" is not necessarily the display name you see with spaces. It is th
    Clone this repository or download the ZIP file and extract it to a folder.
 ```cmd
    git clone [https://github.com/Jasonxza/AutoStreamCheck.git](https://github.com/Jasonxza/AutoStreamCheck.git)
+```
+Install requirements:
+Open your command prompt or terminal in the folder and install the required requests library:
+
+DOS
+```cmd
+pip install -r requirements.txt 
+```
+Run the script:
+Launch the main Python file:
+
+DOS
+ ```cmd
+   python Main.py
+```
+(If you are on Windows and want to hide the background console, rename Main.py to Main.pyw and run it).
+
+First-Time Setup:
+The first time you run the script, a setup window will appear. Enter your Twitch Client ID, Client Secret, and the username of the streamer you want to watch. This data is saved locally to config.json and is never uploaded to the internet.
+
+📁 Local Files Created
+When running, the daemon generates two local files in the same directory:
+
+config.json: Stores your Twitch API credentials.
+
+twitch_data.json: Stores your total watch time and viewer statistics.
+
+⚠️ Disclaimer
+This script is intended for educational purposes and personal use. Automating Twitch viewership can violate Twitch's Terms of Service regarding artificial engagement. Use of this software is at your own risk. The developer assumes no responsibility for any account restrictions, suspensions, or bans resulting from the use of this script.
