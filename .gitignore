@@ -1,0 +1,9 @@
+twitch_data.json
+is_watching.lock
+
+__pycache__/
+*.pyc
+
+build/
+dist/
+*.spec
