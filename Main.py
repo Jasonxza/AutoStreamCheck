@@ -13,11 +13,10 @@ import sys
 # ==========================================
 API_CHECK_INTERVAL = 35  
 DATA_FILE = 'twitch_data.json'
-CONFIG_FILE = 'config.json' # NEW: Where the API keys will be saved
+CONFIG_FILE = 'config.json'
 
 # --- AUTO-UPDATE CONFIG ---
-LOCAL_VERSION = 1.5
-# Updated to your specific Jasonxza RAW repository links
+LOCAL_VERSION = 2.0
 VERSION_URL = "https://raw.githubusercontent.com/Jasonxza/AutoStreamCheck/main/version.txt"
 CODE_URL = "https://raw.githubusercontent.com/Jasonxza/AutoStreamCheck/main/Main.py"
 
