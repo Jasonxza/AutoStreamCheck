@@ -1,3 +1,4 @@
+As of right now im working on a new version expected release 2 weeks
 # Twitch Auto-Watcher Daemon
 
 A lightweight, automated Python dashboard that monitors a specific Twitch streamer's live status. When they go live, it automatically opens their stream in your default browser and tracks your watch time and viewer statistics locally. 
